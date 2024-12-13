@@ -4,300 +4,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Billing System</title>
-    <!-- Google Fonts for styling -->
-    <link href="https://fonts.googleapis.com/css2?family=Foldit:wght@300;400;500&family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <!-- Custom CSS Styles -->
+    <title>Enhanced Billing System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: url('https://www.bing.com/th/id/OGC.6be7128b8a9313853db565542756650f?pid=1.7&rurl=https%3a%2f%2fmedia.giphy.com%2fmedia%2fl0HlxYN4XpgQmwWju%2fgiphy.gif&ehk=zmbRY0j%2bTGfA0bSH%2f1bXUHlAWnpDpElGaZqMYN80qCY%3d') no-repeat center center fixed;
-            background-size: cover;
-            background-attachment: fixed;
-            color: #333; /* Darker text color for better readability */
+            background: linear-gradient(135deg, #8e44ad, #3498db);
+            color: #444;
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for contrast */
-            border-radius: 10px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 30px;
         }
 
-        h1 {
+        header {
             text-align: center;
-            color: #333;
-        }
-
-        .add-item,
-        .items,
-        .total,
-        .invoice {
             margin-bottom: 20px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .add-item h2,
-        .items h2,
-        .total h2,
-        .invoice h2 {
-            margin-top: 0;
-            color: #333;
+        header img {
+            width: 80px;
+            border-radius: 50%;
+            border: 4px solid #8e44ad;
+        }
+
+        header h1 {
+            margin: 10px 0 5px;
+            font-size: 28px;
+            font-weight: 600;
+            color: #8e44ad;
+        }
+
+        header p {
+            color: #666;
+            font-size: 14px;
         }
 
         .input-group {
             display: flex;
-            align-items: center;
-        }
-
-        .input-group input[type="text"],
-        .input-group input[type="number"] {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            margin-right: 10px;
-            color: #333;
-        }
-
-        .input-group button {
-            padding: 10px 16px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .input-group button:hover {
-            background-color: #45a049;
-        }
-
-        .items ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .items li {
-            display: flex;
             flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            flex: 1;
+            min-width: calc(50% - 15px);
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            display: inline-block;
+            margin: 15px 10px 0;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            color: white;
+            background: linear-gradient(135deg, #8e44ad, #3498db);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            transform: scale(1.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: #8e44ad;
+            color: white;
             padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .items li span {
-            flex-grow: 1;
-            margin-right: 10px;
-            color: #333;
-        }
-
-        .items input {
-            width: 100px;
-            margin-right: 50px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 8px;
-            color: #333;
-        }
-
-        .items button {
-            padding: 10px 16px;
-            margin: 0 5px;
-            background-color: #292424;
-            color: #fff;
-            font-size: 12px;
-            font-weight: bold;
-            border: none;
-            border-radius: 16px;
-            cursor: pointer;
-        }
-
-        .items button:hover {
-            background-color: #e62d1f;
-        }
-
-        .total button {
-            padding: 10px 16px;
-            background-color: #0074d9;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .total button:hover {
-            background-color: #0056b3;
-        }
-
-        .total-price {
-            margin-top: 10px;
-            font-weight: bold;
+        td {
+            padding: 12px;
             text-align: center;
-            color: #333;
         }
 
-        .invoice button {
-            padding: 10px 16px;
-            background-color: #ff851b;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
+        .totals {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
         }
 
-        .invoice button:hover {
-            background-color: #e6730f;
+        .totals p {
+            font-size: 18px;
+            margin: 5px 0;
+            text-align: right;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-group button {
+            flex: 1;
+            margin: 5px;
+        }
+
+        .notice {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fdf3f3;
+            border: 1px solid #e74c3c;
+            border-radius: 8px;
+            color: #e74c3c;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .input-group {
+                flex-direction: column;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
     </style>
 </head>
 
 <body>
+
     <div class="container">
-        <!-- Billing System Header -->
-        <h1>Billing System</h1>
+        <header>
+            <img src="https://via.placeholder.com/100" alt="Logo">
+            <h1>TEAM EPSILON</h1>
+            <p>Your Trusted Billing Solution</p>
+        </header>
 
-        <!-- Add Item Section -->
-        <div class="add-item">
-            <h2>Add Item</h2>
-            <div class="input-group">
-                <input type="text" id="item-name" placeholder="Item name" required>
-                <input type="number" id="item-price" placeholder="Item price" required>
-                <input type="number" id="item-quantity" placeholder="Item quantity" required>
-                <button onclick="addItem()">Add</button>
-            </div>
+        <div class="input-group">
+            <input type="text" id="customerName" placeholder="Customer Name">
+            <input type="text" id="customerMobile" placeholder="Customer Mobile">
+            <input type="text" id="customerEmail" placeholder="Customer Email">
         </div>
 
-        <!-- Items List Section -->
-        <div class="items">
-            <h2>Items</h2>
-            <!-- List of items to be dynamically added -->
-            <ul id="item-list"></ul>
+        <h3>Items</h3>
+        <table id="itemsTable">
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Price (₹)</th>
+                    <th>Quantity</th>
+                    <th>GST (%)</th>
+                    <th>Total (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" class="item-name" placeholder="Item Name"></td>
+                    <td><input type="number" class="item-price" placeholder="Price" oninput="updateTotals()"></td>
+                    <td><input type="number" class="item-quantity" placeholder="Quantity" oninput="updateTotals()"></td>
+                    <td><input type="number" class="item-gst" placeholder="GST (%)" oninput="updateTotals()"></td>
+                    <td class="item-total">0.00</td>
+                </tr>
+            </tbody>
+        </table>
+        <button onclick="addItem()">Add Item</button>
+
+        <div class="totals">
+            <p>Total (Excl. GST): ₹<span id="totalExclGST">0.00</span></p>
+            <p>GST: ₹<span id="totalGST">0.00</span></p>
+            <p><strong>Grand Total: ₹<span id="grandTotal">0.00</span></strong></p>
         </div>
 
-        <!-- Calculate Total Section -->
-        <div class="total">
-            <!-- Button to calculate total -->
-            <button onclick="calculateTotal()">Calculate Total</button>
-            <p id="total-price"></p>
+        <div class="btn-group">
+            <button onclick="printPreview()">🖨 Print Invoice</button>
+            <button onclick="sendInvoice()">📲 Send SMS</button>
+            <button onclick="sendEmail()">✉️ Email Invoice</button>
         </div>
 
-        <!-- Invoice Section -->
-        <div class="invoice">
-            <h2>Invoice</h2>
-            <!-- List of items in the invoice -->
-            <ul id="invoice-list"></ul>
-            <!-- Button to generate invoice -->
-            <button onclick="generateInvoice()">Generate Invoice</button>
+        <div class="notice">
+            <p><strong>Note:</strong> Goods once sold cannot be returned. For any queries, contact support at support@teamepsilon.com.</p>
         </div>
     </div>
 
-    <!-- JavaScript for functionality -->
+    <footer>
+        &copy; 2024 TEAM EPSILON. All rights reserved.
+    </footer>
+
     <script>
-        let items = [];
-
         function addItem() {
-            const itemName = document.getElementById("item-name").value;
-            const itemPrice = document.getElementById("item-price").value;
-            const itemQuantity = document.getElementById("item-quantity").value;
-
-            if (itemName && itemPrice && itemQuantity) {
-                const item = {
-                    name: itemName,
-                    price: parseFloat(itemPrice),
-                    quantity: parseInt(itemQuantity)
-                };
-
-                items.push(item);
-
-                renderItems();
-
-                document.getElementById("item-name").value = "";
-                document.getElementById("item-price").value = "";
-                document.getElementById("item-quantity").value = "";
-            }
-        }
-
-        function removeItem(index) {
-            items.splice(index, 1);
-            renderItems();
-        }
-
-        function updateItem(index) {
-            const newQuantity = document.getElementById(`item-quantity-${index}`).value;
-            items[index].quantity = parseInt(newQuantity);
-            renderItems();
-        }
-
-        function renderItems() {
-            const itemList = document.getElementById("item-list");
-            itemList.innerHTML = "";
-
-            items.forEach((item, index) => {
-                const li = document.createElement("li");
-                li.innerHTML = `
-                    <span>${item.name}</span>
-                    <input type="number" id="item-quantity-${index}" value="${item.quantity}" min="1">
-                    <span>$${item.price.toFixed(2)}</span>
-                    <span>$${(item.price * item.quantity).toFixed(2)}</span>
-                    <button onclick="updateItem(${index})">Update</button>
-                    <button onclick="removeItem(${index})">Remove</button>
-                `;
-                itemList.appendChild(li);
-            });
-        }
-
-        function calculateTotal() {
-            const totalPrice = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
-            document.getElementById("total-price").innerText = `Total: $${totalPrice.toFixed(2)}`;
-        }
-
-        function generateInvoice() {
-            const invoiceList = document.getElementById("invoice-list");
-            invoiceList.innerHTML = "";
-
-            let total = 0;
-
-            items.forEach((item) => {
-                const li = document.createElement("li");
-                li.innerHTML = `
-                    <span>${item.name}</span>
-                    <span>${item.quantity}</span>
-                    <span>$${item.price.toFixed(2)}</span>
-                    <span>$${(item.price * item.quantity).toFixed(2)}</span>
-                `;
-                invoiceList.appendChild(li);
-                total += item.price * item.quantity;
-            });
-
-            const totalLi = document.createElement("li");
-            totalLi.innerHTML = `
-                <span>Total:</span>
-                <span></span>
-                <span></span>
-                <span>$${total.toFixed(2)}</span>
+            const table = document.getElementById("itemsTable").querySelector("tbody");
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td><input type="text" class="item-name" placeholder="Item Name"></td>
+                <td><input type="number" class="item-price" placeholder="Price" oninput="updateTotals()"></td>
+                <td><input type="number" class="item-quantity" placeholder="Quantity" oninput="updateTotals()"></td>
+                <td><input type="number" class="item-gst" placeholder="GST (%)" oninput="updateTotals()"></td>
+                <td class="item-total">0.00</td>
             `;
-            invoiceList.appendChild(totalLi);
+            table.appendChild(newRow);
+        }
 
-            calculateTotal();
+        function updateTotals() {
+            const rows = document.querySelectorAll("#itemsTable tbody tr");
+            let totalExclGST = 0;
+            let totalGST = 0;
 
+            rows.forEach(row => {
+                const price = parseFloat(row.querySelector(".item-price").value) || 0;
+                const quantity = parseFloat(row.querySelector(".item-quantity").value) || 0;
+                const gst = parseFloat(row.querySelector(".item-gst").value) || 0;
+
+                const subtotal = price * quantity;
+                const gstAmount = (subtotal * gst) / 100;
+                const total = subtotal + gstAmount;
+
+                row.querySelector(".item-total").textContent = total.toFixed(2);
+
+                totalExclGST += subtotal;
+                totalGST += gstAmount;
+            });
+
+            document.getElementById("totalExclGST").textContent = totalExclGST.toFixed(2);
+            document.getElementById("totalGST").textContent = totalGST.toFixed(2);
+            document.getElementById("grandTotal").textContent = (totalExclGST + totalGST).toFixed(2);
+        }
+
+        function printPreview() {
             window.print();
+        }
+
+        function sendInvoice() {
+            alert("Send SMS functionality not implemented.");
+        }
+
+        function sendEmail() {
+            alert("Send Email functionality not implemented.");
         }
     </script>
 </body>
 
 </html>
-
-
